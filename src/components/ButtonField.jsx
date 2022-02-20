@@ -1,17 +1,17 @@
-import { Button } from "@mui/material";
+import { IconButton } from "@mui/material";
 import React from "react";
-// import { useState } from "react";
-
-export const ButtonField = ({ text}) => {
-  // const [ disabled, setDisabled] = useState(true);
-  // setDisabled();
-  console.log(text)
+import SendIcon from '@material-ui/icons/Send';
+import { pushMessage } from "../firebase";
+export const ButtonField = ({name, setText, text}) => {
   return(
-    <Button 
-      variant="contained"
-      disabled={text.length === 0 ? true : false}
+    <IconButton 
+      disabled={text === ''}
+      onClick={() => {
+        pushMessage({name: 'Takara', text});
+        setText('');
+      }}
     >
-      追加
-    </Button>
+      <SendIcon />
+    </IconButton>
   )
 }

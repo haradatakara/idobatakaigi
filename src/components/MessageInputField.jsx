@@ -28,7 +28,7 @@ const MessageInputField = ({ name }) => {
         <MessageField name={name} setText={setText} text={text} />
       </Grid>
       <Grid item xs={1}  >
-        <ButtonField text={text} />
+        <ButtonField name={name} setText={setText} text={text} />
       </Grid>
     </Grid>
   </div>)
