@@ -33,7 +33,7 @@ const theme = createTheme();
 export default function SignInSide({setName}) {
   const [dispatch, setDispatch] = useState(true);
   const [string, setString ] = useState('');
-  console.log(dispatch);
+  const [ isComposed, setIscomposed ] = useState(false);
   const handleSubmit = (event) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
@@ -89,6 +89,20 @@ return (
               name="name"
               autoFocus
               onChange={(e) => setString(e.target.value)}
+              onKeyDown={(e) => {
+                if(isComposed === false) {
+                  if(e.key === 'Enter') {
+                    setName(e.target.value);
+                    e.preventDefault();
+                  }
+                }
+              }}
+              onCompositionStart={() => {
+                setIscomposed(true);
+              }}
+              onCompositionEnd={() => {
+                setIscomposed(false);
+              }}
             />
             <Button
               type="button"
