@@ -1,9 +1,11 @@
 import React, { useState } from "react"
 import { TextField } from "@material-ui/core"
 
+import { pushMessage } from "../firebase";
+
 export const MessageField = ({name, text, setText }) => {
   const [composed, setComposed] = useState(false);
-  console.log(text, name='takara');
+  
   return(
     <div>
       <TextField 
@@ -13,6 +15,7 @@ export const MessageField = ({name, text, setText }) => {
         onKeyDown={(e) => {
           if(composed === false) {
             if(e.key === 'Enter') {
+              pushMessage({ name: 'Takara', text });
               setText('');
               e.preventDefault();
             }
