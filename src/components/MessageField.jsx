@@ -5,7 +5,7 @@ import { pushMessage } from "../firebase";
 
 export const MessageField = ({name, text, setText, inputEl }) => {
   const [composed, setComposed] = useState(false);
-  
+  console.log(name, text)
   return(
     <div>
       <TextField 
@@ -15,16 +15,20 @@ export const MessageField = ({name, text, setText, inputEl }) => {
         placeholder="入力"
         onChange={(e)=> setText(e.target.value)}
         onKeyDown={(e) => {
-          if(composed === false) {
-            if(e.key === 'Enter') {
-              pushMessage({ name: 'Takara', text });
-              setText('');
-              e.preventDefault();
-            }
-          }
+          if (composed) return;
+
+          const text = e.target.value;
+          if (text === '') return;
+
+          if (e.key === 'Enter') {
+            pushMessage({ name, text });
+            setText('');
+            e.preventDefault();
+        }
         }}
         onCompositionStart={() => setComposed(true)}
         onCompositionEnd={() => setComposed(false)}
+        value={text}
       />
     </div>
   )
