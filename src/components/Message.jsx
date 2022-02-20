@@ -6,8 +6,10 @@ const useStyles = makeStyles({
     gridRow: 1,
   }
 })
+
 const Message = () => {
   const classes = useStyles();
+  
   return <div className={classes.root}>MessageList</div>
 }
 
