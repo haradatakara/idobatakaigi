@@ -16,11 +16,10 @@ const useStyles = makeStyles({
 const Message = () => {
   const [messages, setMessages] = useState([]);
   const classes = useStyles();
-  console.log(messages);
+  
   useEffect(() => {
     messagesRef
     .orderByKey()
-    .limitToLast(5)
     .on('value', (snapshot) => {
     const messages = snapshot.val();
     if (messages === null) return;
@@ -35,15 +34,17 @@ const Message = () => {
   })
   }, []);
 
+  const length = messages.length;
+
   
   return( 
     <List className={classes.root}>
       {
-        messages.map(({key, name, text}) => {
-          return <MessageItem key={key} name={name} text={text}>Item</MessageItem>
+        messages.map(({key, name, text}, index) => {
+          const isLastItem = length === index + 1;
+          return <MessageItem key={key} name={name} text={text} isLastItem={isLastItem} />
         })
       }
-
     </List>
   )
 }
